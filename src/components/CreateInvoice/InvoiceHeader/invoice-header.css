@@ -1,0 +1,10 @@
+.invoice-header {
+  width: 95%;
+  margin: auto;
+  margin-bottom: 40px;
+}
+.invoice-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

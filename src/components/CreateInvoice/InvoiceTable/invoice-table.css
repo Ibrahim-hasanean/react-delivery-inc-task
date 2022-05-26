@@ -1,0 +1,23 @@
+.invoice-table {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 250px;
+  margin-bottom: 50px;
+}
+
+.column-text {
+  text-align: left;
+}
+.text {
+  margin: 0;
+  font-size: 14px;
+}
+
+.table-column {
+  display: flex;
+  flex-direction: column;
+}
+.table-items {
+  flex: 1;
+}
