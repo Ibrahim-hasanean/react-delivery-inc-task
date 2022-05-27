@@ -11,7 +11,7 @@ import {
 import AppDataContext from "../../contexts/appDataContext";
 import CustomerTableRow from "./CustomerTableRow";
 const CustomersTable = () => {
-  const { appData } = useContext(AppDataContext);
+  const { customers } = useContext(AppDataContext);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -24,7 +24,7 @@ const CustomersTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {appData.customers?.map((user) => {
+          {customers?.map((user) => {
             return <CustomerTableRow key={user.id} user={user} />;
           })}
         </TableBody>

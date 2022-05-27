@@ -30,7 +30,7 @@ const AddPackage = ({ open, closeConfirm }) => {
     shippingOrder: "",
     customerid: "",
   });
-  const { appData, addPackage } = useContext(AppDataContext);
+  const { customers, addPackage } = useContext(AppDataContext);
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -53,55 +53,68 @@ const AddPackage = ({ open, closeConfirm }) => {
     <Modal open={open} onClose={closeConfirm}>
       <form onSubmit={submitForm}>
         <Grid container gap={2} sx={style}>
-          <Grid container justifyContent="space-between">
-            <Grid item xs={12} md={5}>
-              <TextField
-                value={data.weight}
-                onChange={handleChange}
-                name="weight"
-                placeholder="weight"
-                type="number"
-                required
-              />
-            </Grid>
-            <Grid item xs={12} md={5}>
-              <TextField
-                value={data.price}
-                onChange={handleChange}
-                name="price"
-                placeholder="price"
-                type="number"
-                required
-              />
-            </Grid>
+          <Grid item xs={12}>
+            <TextField
+              value={data.weight}
+              onChange={handleChange}
+              name="weight"
+              label="weight"
+              type="number"
+              required
+              fullWidth
+            />
           </Grid>
-          <Grid container>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">customer</InputLabel>
-              <Select
-                value={data.customerid}
-                onChange={handleChange}
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Age"
-                name="customerid"
-                required
-              >
-                {appData.customers.map((customer) => (
-                  <MenuItem key={customer.id} value={customer.id}>
-                    {customer.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+          <Grid item xs={12}>
+            <TextField
+              value={data.price}
+              onChange={handleChange}
+              name="price"
+              label="price"
+              type="number"
+              required
+              fullWidth
+            />
           </Grid>
+
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">customer</InputLabel>
+            <Select
+              value={data.customerid}
+              onChange={handleChange}
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="customer"
+              name="customerid"
+              required
+            >
+              {customers.map((customer) => (
+                <MenuItem key={customer.id} value={customer.id}>
+                  {customer.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <Grid container justifyContent="center" gap={4}>
-            <Button type="submit" variant="contained" color="primary">
-              Add
-            </Button>
-            <Button onClick={closeConfirm} variant="contained" color="inherit">
-              Cancel
-            </Button>
+            <Grid item xs={5}>
+              <Button
+                fullWidth
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
+                Add
+              </Button>
+            </Grid>
+            <Grid item xs={5}>
+              <Button
+                fullWidth
+                onClick={closeConfirm}
+                variant="contained"
+                color="inherit"
+              >
+                Cancel
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       </form>

@@ -12,7 +12,7 @@ const appDataReducer = (state, action) => {
       const packages = state.packages;
       const data = action.payload.data;
       let customer = state.customers.find(
-        (x) => x.id === Number(data.customerid)
+        (customer) => customer.id === Number(data.customerid)
       );
       let newPackage = {
         ...data,
@@ -31,8 +31,14 @@ const appDataReducer = (state, action) => {
       const packages = state.packages;
       const currentPackage = packages[pacakageIndex];
       const prevPackage = packages[pacakageIndex - 1];
-      packages[pacakageIndex] = prevPackage;
-      packages[pacakageIndex - 1] = currentPackage;
+      packages[pacakageIndex] = {
+        ...prevPackage,
+        shippingOrder: currentPackage.shippingOrder,
+      };
+      packages[pacakageIndex - 1] = {
+        ...currentPackage,
+        shippingOrder: prevPackage.shippingOrder,
+      };
       return {
         ...state,
         packages: [...packages],
@@ -43,8 +49,14 @@ const appDataReducer = (state, action) => {
       const packages = state.packages;
       const currentPackage = packages[pacakageIndex];
       const nextPackage = packages[pacakageIndex + 1];
-      packages[pacakageIndex] = nextPackage;
-      packages[pacakageIndex + 1] = currentPackage;
+      packages[pacakageIndex] = {
+        ...nextPackage,
+        shippingOrder: currentPackage.shippingOrder,
+      };
+      packages[pacakageIndex + 1] = {
+        ...currentPackage,
+        shippingOrder: nextPackage.shippingOrder,
+      };
       return {
         ...state,
         packages: [...packages],
@@ -53,10 +65,14 @@ const appDataReducer = (state, action) => {
     case appDataConstant.Delete_Package:
       return {
         ...state,
-        packages: state.packages.filter((x) => x.id !== action.payload.id),
+        packages: state.packages.filter(
+          (pack) => pack.id !== action.payload.id
+        ),
       };
     case appDataConstant.Get_Customer_By_Id:
-      let customer = state.customers.find((x) => x.id === action.payload.id);
+      let customer = state.customers.find(
+        (customer) => customer.id === action.payload.id
+      );
       return {
         ...state,
         customer,
@@ -64,11 +80,13 @@ const appDataReducer = (state, action) => {
     case appDataConstant.Delete_Customer:
       return {
         ...state,
-        customers: state.customers.filter((x) => x.id !== action.payload.id),
+        customers: state.customers.filter(
+          (customer) => customer.id !== action.payload.id
+        ),
       };
     case appDataConstant.Get_Customer_Packages:
       let customerPackages = state.packages.filter(
-        (x) => x.customerid === action.payload.customerId
+        (pack) => pack.customerid === action.payload.customerId
       );
       return {
         ...state,

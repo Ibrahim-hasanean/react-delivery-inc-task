@@ -9,7 +9,7 @@ const InvoiceHeader = ({ customer, invoice }) => {
       </div>
       <div className="invoice-header-row">
         <p>{customer?.name}</p>
-        <p>No. {invoice.id}</p>
+        <p>No. {invoice?.id}</p>
       </div>
     </div>
   );

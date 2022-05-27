@@ -15,7 +15,7 @@ import PackagesTableRow from "./PackagesTableRow";
 import AddPackage from "./AddPackage";
 import useOpenConfirm from "../../hooks/useOpenConfirm";
 const PackagesTable = () => {
-  const { appData } = useContext(AppDataContext);
+  const { packages } = useContext(AppDataContext);
   const { open, openConfirm, closeConfirm } = useOpenConfirm();
   return (
     <TableContainer component={Paper}>
@@ -41,14 +41,14 @@ const PackagesTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {appData.packages.map((pack, index) => {
+          {packages.map((pack, index) => {
             return (
               <PackagesTableRow
                 key={pack.id}
                 packageIndex={index}
                 pack={pack}
                 isFirst={index === 0}
-                isLast={index === appData.packages.length - 1}
+                isLast={index === packages.length - 1}
               />
             );
           })}
